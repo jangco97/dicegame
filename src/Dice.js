@@ -1,4 +1,5 @@
 import React from 'react';
+import './Dice.css'
 import diceBlue01 from './assets/dice-blue-1.svg';
 import diceBlue02 from './assets/dice-blue-2.svg';
 import diceBlue03 from './assets/dice-blue-3.svg';
@@ -19,7 +20,7 @@ const DICE_IMAGES = {
 function Dice({ color = "blue", num = 1 }) {
     const src = DICE_IMAGES[color][num - 1]
     const alt = `${color} ${num}`
-    return <img src={src} alt={alt}></img>
+    return <img className = 'Dice' src={src} alt={alt}></img>
 }
 
 export default Dice;

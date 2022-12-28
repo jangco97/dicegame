@@ -1,0 +1,21 @@
+.Button {
+    min-width: 120px;
+    padding: 14px 27px;
+    border-radius: 9999px;
+    outline: none;
+    font-size: 18px;
+    font-family: 'NanumSquareRoundEB';
+    cursor: pointer;
+}
+
+.Button.color {
+    border: solid 2px #34515e;
+    color: #34515e;
+    background-color: #8eacbb;
+}
+
+.Button:hover {
+    border: solid 2px #8eacbb;
+    color: #8eacbb;
+    background-color: #34515e;
+}

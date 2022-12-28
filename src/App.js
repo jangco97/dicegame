@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import Board from './Board';
+import AppLogo from './assets/logo.png'
+import './App.css';
 function random(n){
     return Math.ceil(Math.random()*n)
 }
@@ -11,6 +13,8 @@ function App() {
     //함수들에 의해 데이터가 완성되었으면 그것을 prop을 통해 내려줘서 서로 다른 board컴포넌트가 완성된다.
     const [myHistory, setMyHistory] = useState([])
     const [otherHistory, setOtherHistory] = useState([])
+    const [myWinner, setWinner] = useState('')
+    const [otherWinner, setOtherWinner] = useState('')
     const handleRollClick = () => {
         const myNextNum = random(6)
         const nextOtherNum = random(6)
@@ -21,20 +25,40 @@ function App() {
         setOtherHistory([...otherHistory, nextOtherNum])
         console.log(myHistory)
         console.log(otherHistory)
+        if(myNextNum > nextOtherNum){
+            setWinner('Board-winner')
+            setOtherWinner('')
+        } else if(myNextNum < nextOtherNum){
+            setOtherWinner('Board-winner')
+            setWinner('')
+        }else{
+            setOtherWinner('')
+            setWinner('')
+        }
+        
     }
     //지우기 버튼 누르면 해당 함수 동작. 나의 state와 상대편 state를 초기화한다.
     const handleClearClick = () => {
         setMyHistory([])
         setOtherHistory([])
+        setWinner('')
+        setOtherWinner('')
     }
     return (
-        <div>
+        <div className='App'>
             <div>
-                <Button onClick={handleRollClick}>던지기</Button>
-                <Button onClick={handleClearClick}>처음부터</Button>
+                <img className='App-logo' src={AppLogo}></img>
+                <h1 className='App-title'>주사위 게임</h1>
+                <div>
+                    <Button className='color App-button' onClick={handleRollClick}>던지기</Button>
+                    <Button className='color App-button' onClick={handleClearClick}>처음부터</Button>
+                </div>
+                
             </div>
-                <Board user={"나"} color={"blue"} historyList={myHistory}></Board>
-                <Board user={"상대"} color={"red"} historyList={otherHistory}></Board>
+            <div className='App-boards'>
+                <Board user={"나"} color={"blue"} historyList={myHistory} className={myWinner}></Board>
+                <Board user={"상대"} color={"red"} historyList={otherHistory} className={otherWinner}></Board>
+            </div>              
         </div>
     )
 }
